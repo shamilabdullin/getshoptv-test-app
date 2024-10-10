@@ -5,6 +5,11 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --orange: #ff5900;
+  --white: #fff;
+  --black: #1d1d1b;
+  --gray_01: #a4adac;
+  --gray_04: #f2f6f6;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -15,13 +20,15 @@
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Onest', sans-serif;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+button {
+  color: #1d1d1b;
 }
