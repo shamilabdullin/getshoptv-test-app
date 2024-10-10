@@ -3,13 +3,15 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --orange: #ff5900;
   --white: #fff;
-  --black: #1d1d1b;
   --gray_01: #a4adac;
+  --gray_01: #d6dbdb;
+  --gray_03: #e8edee;
   --gray_04: #f2f6f6;
+  --black: #1d1d1b;
+  --orange: #ff5900;
+  --dark_orange: #ff5900;
+  --error: #ff4026;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -21,6 +23,7 @@
 
 body {
   font-family: 'Onest', sans-serif;
+  overflow-x: hidden;
 }
 
 @layer utilities {
@@ -31,4 +34,9 @@ body {
 
 button {
   color: #1d1d1b;
+}
+
+h2 {
+  font-weight: 700;
+  font-size: 24px;
 }
