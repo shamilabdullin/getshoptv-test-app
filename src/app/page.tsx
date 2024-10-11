@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import styles from './page.module.sass'
 import Logo from '@/public/logo.svg'
-import { useState } from 'react'
+import { MutableRefObject, useEffect, useRef, useState } from 'react'
 import classNames from 'classnames'
 import Card from './components/Card'
 import ArrowIcon from '@/public/ArrowIcon.svg'
@@ -18,8 +18,48 @@ import Notebook from '@/public/Notebook.png'
 export default function Home() {
   const [source, setSource] = useState('operators')
 
+  const advantagesBlock = useRef(null)
+  const [isVisibleAdvantages, setIsVisibleAdvantages] = useState(false)
+
+  const howWeWorkBlock = useRef(null)
+  const [isVisibleHowWeWorkBlock, setIsVisibleHowWeWorkBlock] = useState(false)
+
+  useEffect(() => {
+    const advantagesObserver = new IntersectionObserver(([entry]) => {
+      setIsVisibleAdvantages(entry.isIntersecting) // Проверяем, находится ли элемент в поле видимости
+    })
+
+    const howWeWorkObserver = new IntersectionObserver(([entry]) => {
+      setIsVisibleHowWeWorkBlock(entry.isIntersecting) // Проверяем, находится ли элемент в поле видимости
+    })
+
+    const advantages = advantagesBlock.current
+    if (advantages) advantagesObserver.observe(advantages)
+
+    const howWeWork = howWeWorkBlock.current
+    if (howWeWork) howWeWorkObserver.observe(howWeWork)
+
+    if (isVisibleHowWeWorkBlock) setIsVisibleAdvantages(false)
+
+    console.log('test')
+
+    return () => {
+      if (advantages) advantagesObserver.unobserve(advantages)
+      if (howWeWork) howWeWorkObserver.unobserve(howWeWork)
+    }
+  }, [isVisibleHowWeWorkBlock])
+
   const handleSource = (source: string) => {
     setSource(source)
+  }
+
+  const scrollToElement = (ref: MutableRefObject<HTMLDivElement | null>) => {
+    if (ref.current !== null) {
+      ref.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      })
+    }
   }
 
   return (
@@ -29,12 +69,38 @@ export default function Home() {
           <Image src={Logo} alt="logo" />
         </div>
         <div className={styles.home__header__menu}>
-          <button className={styles.home__header__menu__item}>Преимущества</button>
-          <button className={styles.home__header__menu__item}>Как работаем</button>
+          <button
+            className={
+              isVisibleAdvantages
+                ? classNames(
+                    styles.home__header__menu__item,
+                    styles.home__header__menu__item__active,
+                  )
+                : styles.home__header__menu__item
+            }
+          >
+            Преимущества
+          </button>
+          <button
+            onClick={() => scrollToElement(howWeWorkBlock)}
+            className={
+              isVisibleHowWeWorkBlock
+                ? classNames(
+                    styles.home__header__menu__item,
+                    styles.home__header__menu__item__active,
+                  )
+                : styles.home__header__menu__item
+            }
+          >
+            Как работаем
+          </button>
         </div>
       </header>
       <section className={styles.home__main}>
-        <h1>Монетизируйте клиентскую базу, не снижая NPS</h1>
+        <h1>
+          Монетизируйте клиентскую
+          <br /> базу, не снижая NPS
+        </h1>
         <h2>
           Найдите идеальный баланс выручки
           <br />
@@ -94,7 +160,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className={styles.home__promotion}>
+      <section className={styles.home__promotion} ref={howWeWorkBlock}>
         <h1 className={styles.home__promotion__title}>
           Баланс между выручкой и удовлетворённостью пользователей
         </h1>
@@ -126,7 +192,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className={styles.home__section5}>
+      <section className={styles.home__section5} ref={advantagesBlock}>
         <div className={styles.home__section5__content}>
           <div className={styles.home__section5__content__title}>
             <h1>

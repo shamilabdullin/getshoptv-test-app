@@ -1,0 +1,52 @@
+@tailwind base
+@tailwind components
+@tailwind utilities
+@import './variables.sass'
+
+:root 
+  --white: #fff
+  --gray_01: #a4adac
+  --gray_02: #d6dbdb
+  --gray_03: #e8edee
+  --gray_04: #f2f6f6
+  --black: #1d1d1b
+  --orange: #ff5900
+  --dark_orange: #ff5900
+  --error: #ff4026
+  
+body 
+  font-family: 'Onest', sans-serif
+  overflow-x: hidden
+  
+button 
+  color: #1d1d1b
+
+h1 
+  font-weight: 700
+  font-size: 80px
+
+  @media (max-width: $breakpoint-tablet)
+    font-size: 52px
+
+  @media (max-width: $breakpoint-mobile)
+    font-size: 36px
+
+h2 
+  font-weight: 700
+  font-size: 32px
+
+  @media (max-width: $breakpoint-tablet)
+    font-size: 28px
+
+  @media (max-width: $breakpoint-mobile)
+    font-size: 24px
+
+h3
+  font-weight: 700
+  font-size: 24px
+
+  @media (max-width: $breakpoint-tablet)
+    font-size: 16px
+
+  @media (max-width: $breakpoint-mobile)
+    font-size: 20px
