@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import styles from './page.module.sass'
 import Logo from '@/public/logo.svg'
-import { MutableRefObject, useEffect, useRef, useState } from 'react'
+import { ChangeEvent, MutableRefObject, useEffect, useRef, useState } from 'react'
 import classNames from 'classnames'
 import Card from './components/Card'
 import ArrowIcon from '@/public/ArrowIcon.svg'
@@ -19,35 +19,39 @@ export default function Home() {
   const [source, setSource] = useState('operators')
 
   const advantagesBlock = useRef(null)
-  const [isVisibleAdvantages, setIsVisibleAdvantages] = useState(false)
-
   const howWeWorkBlock = useRef(null)
-  const [isVisibleHowWeWorkBlock, setIsVisibleHowWeWorkBlock] = useState(false)
+  const mainBlock = useRef(null)
+  const [visibleBlock, setVisibleBlock] = useState('')
+  const [isCorrectEmail, setIsCorrectEmail] = useState(true)
+  const [email, setEmail] = useState('')
 
   useEffect(() => {
-    const advantagesObserver = new IntersectionObserver(([entry]) => {
-      setIsVisibleAdvantages(entry.isIntersecting) // Проверяем, находится ли элемент в поле видимости
-    })
-
     const howWeWorkObserver = new IntersectionObserver(([entry]) => {
-      setIsVisibleHowWeWorkBlock(entry.isIntersecting) // Проверяем, находится ли элемент в поле видимости
+      if (entry.isIntersecting) setVisibleBlock('howWeWork')
     })
 
-    const advantages = advantagesBlock.current
-    if (advantages) advantagesObserver.observe(advantages)
+    const advantagesObserver = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) setVisibleBlock('advantages')
+    })
+
+    const mainBlockObserver = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) setVisibleBlock('')
+    })
+
+    const main = mainBlock.current
+    if (main) mainBlockObserver.observe(main)
 
     const howWeWork = howWeWorkBlock.current
     if (howWeWork) howWeWorkObserver.observe(howWeWork)
 
-    if (isVisibleHowWeWorkBlock) setIsVisibleAdvantages(false)
-
-    console.log('test')
+    const advantages = advantagesBlock.current
+    if (advantages) advantagesObserver.observe(advantages)
 
     return () => {
-      if (advantages) advantagesObserver.unobserve(advantages)
       if (howWeWork) howWeWorkObserver.unobserve(howWeWork)
+      if (advantages) advantagesObserver.unobserve(advantages)
     }
-  }, [isVisibleHowWeWorkBlock])
+  }, [])
 
   const handleSource = (source: string) => {
     setSource(source)
@@ -62,6 +66,12 @@ export default function Home() {
     }
   }
 
+  const handleValidateEmail = (e: ChangeEvent<HTMLInputElement>) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    setIsCorrectEmail(emailRegex.test(e.target.value) || !e.target.value)
+    setEmail(e.target.value)
+  }
+
   return (
     <div className={styles.home}>
       <header className={styles.home__header}>
@@ -70,8 +80,12 @@ export default function Home() {
         </div>
         <div className={styles.home__header__menu}>
           <button
+            onClick={() => {
+              setVisibleBlock('advantages')
+              scrollToElement(advantagesBlock)
+            }}
             className={
-              isVisibleAdvantages
+              visibleBlock === 'advantages'
                 ? classNames(
                     styles.home__header__menu__item,
                     styles.home__header__menu__item__active,
@@ -82,9 +96,12 @@ export default function Home() {
             Преимущества
           </button>
           <button
-            onClick={() => scrollToElement(howWeWorkBlock)}
+            onClick={() => {
+              setVisibleBlock('howWeWork')
+              scrollToElement(howWeWorkBlock)
+            }}
             className={
-              isVisibleHowWeWorkBlock
+              visibleBlock === 'howWeWork'
                 ? classNames(
                     styles.home__header__menu__item,
                     styles.home__header__menu__item__active,
@@ -96,7 +113,7 @@ export default function Home() {
           </button>
         </div>
       </header>
-      <section className={styles.home__main}>
+      <section className={styles.home__main} ref={mainBlock}>
         <h1>
           Монетизируйте клиентскую
           <br /> базу, не снижая NPS
@@ -160,7 +177,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className={styles.home__promotion} ref={howWeWorkBlock}>
+      <section className={styles.home__promotion} ref={advantagesBlock}>
         <h1 className={styles.home__promotion__title}>
           Баланс между выручкой и удовлетворённостью пользователей
         </h1>
@@ -171,8 +188,14 @@ export default function Home() {
             text="Чтобы не ронять NPS и не увеличивать отток пользователей"
           />
           <div className={styles.home__promotion__main__image}>
-            <Image src={LeftLineOrange} alt="" />
+            <Image
+              src={LeftLineOrange}
+              alt=""
+              className={styles.home__promotion__main__image__leftLine}
+            />
+            {/* <div style={{ height: '100%', width: '100%' }}> */}
             <Image src={SquareOrange} alt="" />
+            {/* </div> */}
             <Image src={RightLineOrange} alt="" />
           </div>
           <Card
@@ -192,7 +215,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className={styles.home__section5} ref={advantagesBlock}>
+      <section className={styles.home__section5} ref={howWeWorkBlock}>
         <div className={styles.home__section5__content}>
           <div className={styles.home__section5__content__title}>
             <h1>
@@ -237,16 +260,31 @@ export default function Home() {
             ></textarea>
           </div>
           <div className={styles.home__section6__form__end}>
-            <input
-              type="text"
-              placeholder="Введите e-mail"
-              className={styles.home__section6__form__end__input}
-            />
+            <div className={styles.home__section6__form__end__password}>
+              <input
+                type="text"
+                placeholder="Введите e-mail"
+                value={email}
+                className={
+                  isCorrectEmail
+                    ? styles.home__section6__form__end__input
+                    : styles.home__section6__form__end__input__error
+                }
+                onChange={(e) => handleValidateEmail(e)}
+              />
+              {isCorrectEmail ? (
+                <></>
+              ) : (
+                <p className={styles.home__section6__form__end__password__helper}>
+                  Неправильно указана почта
+                </p>
+              )}
+            </div>
             <div className={styles.home__section6__form__end__checkbox}>
-              <input type="checkbox" style={{ marginTop: '4px' }} />
+              <input type="checkbox" style={{ marginTop: '4px', backgroundColor: 'red' }} />
               <p>
-                Я ознакомлен(а) с политикой конфиденциальности и согласен(на) на обработку
-                персональных данных.
+                Я ознакомлен(а) с <u>политикой конфиденциальности</u> и согласен(на) на обработку
+                <u>персональных данных.</u>
               </p>
             </div>
             <button className={styles.home__section6__form__end__button}>Отправить</button>
