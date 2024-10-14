@@ -14,6 +14,11 @@ import ClickWaveCompany from '@/public/ClickWaveCompany.png'
 import ZyphronixCompany from '@/public/ZyphronixCompany.png'
 import NovasphereCompany from '@/public/NovasphereCompany.png'
 import Notebook from '@/public/Notebook.png'
+import Burger from '@/public/Burger.svg'
+import { useMediaQuery } from 'usehooks-ts'
+import Close from '@/public/Close.svg'
+import TopLine from '@/public/TopLine.svg'
+import BottomLine from '@/public/BottomLine.svg'
 
 export default function Home() {
   const [source, setSource] = useState('operators')
@@ -24,6 +29,9 @@ export default function Home() {
   const [visibleBlock, setVisibleBlock] = useState('')
   const [isCorrectEmail, setIsCorrectEmail] = useState(true)
   const [email, setEmail] = useState('')
+  const tablet = useMediaQuery(`(max-width: 1023px)`)
+  const mobile = useMediaQuery(`(max-width: 767px)`)
+  const [isOpenMenu, setIsOpenMenu] = useState(false)
 
   useEffect(() => {
     const howWeWorkObserver = new IntersectionObserver(([entry]) => {
@@ -79,38 +87,50 @@ export default function Home() {
           <Image src={Logo} alt="logo" />
         </div>
         <div className={styles.home__header__menu}>
-          <button
-            onClick={() => {
-              setVisibleBlock('advantages')
-              scrollToElement(advantagesBlock)
-            }}
-            className={
-              visibleBlock === 'advantages'
-                ? classNames(
-                    styles.home__header__menu__item,
-                    styles.home__header__menu__item__active,
-                  )
-                : styles.home__header__menu__item
-            }
-          >
-            Преимущества
-          </button>
-          <button
-            onClick={() => {
-              setVisibleBlock('howWeWork')
-              scrollToElement(howWeWorkBlock)
-            }}
-            className={
-              visibleBlock === 'howWeWork'
-                ? classNames(
-                    styles.home__header__menu__item,
-                    styles.home__header__menu__item__active,
-                  )
-                : styles.home__header__menu__item
-            }
-          >
-            Как работаем
-          </button>
+          {tablet ? (
+            <button
+              onClick={() => setIsOpenMenu((prev) => !prev)}
+              className={styles.home__header__menu__burger}
+            >
+              <Image src={Burger} alt="burger-menu" width={44} height={44} />
+            </button>
+          ) : (
+            <>
+              {' '}
+              <button
+                onClick={() => {
+                  setVisibleBlock('advantages')
+                  scrollToElement(advantagesBlock)
+                }}
+                className={
+                  visibleBlock === 'advantages'
+                    ? classNames(
+                        styles.home__header__menu__item,
+                        styles.home__header__menu__item__active,
+                      )
+                    : styles.home__header__menu__item
+                }
+              >
+                Преимущества
+              </button>
+              <button
+                onClick={() => {
+                  setVisibleBlock('howWeWork')
+                  scrollToElement(howWeWorkBlock)
+                }}
+                className={
+                  visibleBlock === 'howWeWork'
+                    ? classNames(
+                        styles.home__header__menu__item,
+                        styles.home__header__menu__item__active,
+                      )
+                    : styles.home__header__menu__item
+                }
+              >
+                Как работаем
+              </button>
+            </>
+          )}
         </div>
       </header>
       <section className={styles.home__main} ref={mainBlock}>
@@ -130,8 +150,8 @@ export default function Home() {
         <div>
           <h1>
             Дополнительные источники
-            <br /> выручки для разных
-            <br /> компаний
+            {!mobile ? <br /> : <></>} выручки для разных
+            {!mobile ? <br /> : <></>} компаний
           </h1>
         </div>
         <div className={styles.home__sources__menu}>
@@ -188,15 +208,21 @@ export default function Home() {
             text="Чтобы не ронять NPS и не увеличивать отток пользователей"
           />
           <div className={styles.home__promotion__main__image}>
-            <Image
-              src={LeftLineOrange}
-              alt=""
-              className={styles.home__promotion__main__image__leftLine}
-            />
-            {/* <div style={{ height: '100%', width: '100%' }}> */}
+            <div className={styles.home__promotion__main__image__rightLine}>
+              <Image
+                src={!mobile ? LeftLineOrange : TopLine}
+                alt=""
+                className={styles.home__promotion__main__image__leftLine}
+              />
+            </div>
             <Image src={SquareOrange} alt="" />
-            {/* </div> */}
-            <Image src={RightLineOrange} alt="" />
+            <div className={styles.home__promotion__main__image__rightLine}>
+              <Image
+                src={!mobile ? RightLineOrange : BottomLine}
+                alt=""
+                className={styles.home__promotion__main__image__rightLine}
+              />
+            </div>
           </div>
           <Card
             icon={ArrowIcon}
@@ -207,11 +233,39 @@ export default function Home() {
       </section>
       <section className={styles.home__partners}>
         <div className={styles.home__partners__content}>
-          <h2>Наши партнёры по монетизации</h2>
+          <h2 className={styles.home__partners__content__title}>Наши партнёры по монетизации</h2>
           <div className={styles.home__partners__content__items}>
-            <Image src={ClickWaveCompany} alt="" />
-            <Image src={ZyphronixCompany} alt="" />
-            <Image src={NovasphereCompany} alt="" />
+            <Image
+              src={ClickWaveCompany}
+              alt=""
+              className={styles.home__partners__content__items__item}
+            />
+            {!mobile ? (
+              <Image
+                src={ZyphronixCompany}
+                alt=""
+                className={styles.home__partners__content__items__item}
+              />
+            ) : (
+              <Image
+                src={NovasphereCompany}
+                alt=""
+                className={styles.home__partners__content__items__item}
+              />
+            )}
+            {!mobile ? (
+              <Image
+                src={NovasphereCompany}
+                alt=""
+                className={styles.home__partners__content__items__item}
+              />
+            ) : (
+              <Image
+                src={ZyphronixCompany}
+                alt=""
+                className={styles.home__partners__content__items__item}
+              />
+            )}
           </div>
         </div>
       </section>
@@ -219,7 +273,7 @@ export default function Home() {
         <div className={styles.home__section5__content}>
           <div className={styles.home__section5__content__title}>
             <h1>
-              Подробные отчёты для вас и <br /> правообладателей
+              Подробные{tablet ? <br /> : <></>} отчёты для вас и <br /> правообладателей
             </h1>
           </div>
           <ul className={styles.home__section5__content__list}>
@@ -244,9 +298,13 @@ export default function Home() {
           </ul>
           <button className={styles.home__section5__content__button}>Заказать звонок</button>
         </div>
-        <div className={styles.home__section5__image}>
-          <Image src={Notebook} alt="" />
-        </div>
+        {mobile ? (
+          <div className={styles.home__section5__imageContainer}>
+            <Image src={Notebook} alt="" className={styles.home__section5__image} />
+          </div>
+        ) : (
+          <Image src={Notebook} alt="" className={styles.home__section5__image} />
+        )}
       </section>
       <section className={styles.home__section6}>
         <h1 className={styles.home__section6__title}>Заполните форму</h1>
@@ -291,6 +349,51 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <div
+        className={
+          !isOpenMenu ? styles.home__menu : classNames(styles.home__menu, styles.home__menu__active)
+        }
+      >
+        {' '}
+        <button
+          onClick={() => setIsOpenMenu((prev) => !prev)}
+          className={styles.home__menu__burger}
+        >
+          <Image src={Close} alt="burger-menu" />
+        </button>
+        <ul className={styles.home__menu__list}>
+          <li>
+            <button
+              className={
+                visibleBlock === 'advantages'
+                  ? classNames(styles.home__menu__list__item, styles.home__menu__list__item__active)
+                  : styles.home__menu__list__item
+              }
+              onClick={() => {
+                setVisibleBlock('advantages')
+                scrollToElement(advantagesBlock)
+              }}
+            >
+              Преимущества
+            </button>
+          </li>
+          <li>
+            <button
+              className={
+                visibleBlock === 'howWeWork'
+                  ? classNames(styles.home__menu__list__item, styles.home__menu__list__item__active)
+                  : styles.home__menu__list__item
+              }
+              onClick={() => {
+                setVisibleBlock('howWeWork')
+                scrollToElement(howWeWorkBlock)
+              }}
+            >
+              Как мы работаем
+            </button>
+          </li>
+        </ul>
+      </div>
     </div>
   )
 }

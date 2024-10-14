@@ -6,6 +6,7 @@ type CardProps = {
   icon: string
   title: string
   text: string
+  // className: string
 }
 
 function Card({ icon, title, text }: CardProps) {

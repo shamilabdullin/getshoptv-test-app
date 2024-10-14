@@ -1,9 +1,16 @@
 @import "./variables"
   
 .home
-  padding:0 0 2rem 0
+  padding:2rem 0 2rem 0
   overflow: hidden
   background-color: var(--gray_03)
+
+  @media (max-width: $breakpoint-tablet)
+    padding-top: 11px
+
+  @media (max-width: $breakpoint-mobile)
+    padding-top: 0
+    padding-bottom: 0
 
   &__header
     display: flex
@@ -18,12 +25,17 @@
     z-index: 10
 
     @media (max-width: $breakpoint-tablet)
-      padding: 2rem $tablet-padding 0
+      display: flex
+      align-items: center
+      padding: 0 $tablet-padding 0
 
     @media (max-width: $breakpoint-mobile)
-      padding: 2rem $mobile-padding 0
+      padding: 0 $mobile-padding
+      height: 60px
 
     &__logo
+      @media (max-width: $breakpoint-mobile)
+        width: 113px
 
     &__menu
       &__item
@@ -32,6 +44,14 @@
         &__active
           color: var(--orange)
 
+      &__burger
+        width: 44px
+        height: 44px
+
+        @media (max-width: $breakpoint-mobile)
+          width: 32px
+          height: 32px
+
   &__main
     padding: 116px $desktop-padding 183px
     background-image: url('./Background.png')
@@ -39,19 +59,29 @@
     background-size: 100% 100%
 
     @media (max-width: $breakpoint-tablet)
-      padding: 96px $tablet-padding 120px
+      padding: 116px $tablet-padding 120px
 
     @media (max-width: $breakpoint-mobile)
-      padding: 67px $mobile-padding 80px
+      padding: 113px $mobile-padding 80px
+      background-size: 300% 90%
 
     h1
       margin-bottom: 2rem
       line-height: 88px
 
+      @media (max-width: $breakpoint-tablet)
+        line-height: 57.2px
+
+      @media (max-width: $breakpoint-mobile)
+        line-height: 39.6px
+
     h2
       font-weight: 400
       font-size: 24px
       margin-bottom: 80px
+
+      @media (max-width: $breakpoint-mobile)
+        font-size: 16px
 
     &__action
       background-color: var(--orange)
@@ -59,38 +89,76 @@
       border-radius: 10px
       color: var(--white)
 
+      @media (max-width: $breakpoint-mobile)
+        width: 100%
+        margin-top: 2rem
+
   &__sources
     display: flex
-    flex-direction: raw
+    flex-direction: row
     justify-content: space-between
     padding: 0 $desktop-padding
     padding-bottom: 94px
+    gap: 140px
 
     @media (max-width: $breakpoint-tablet)
-      padding: 0 $tablet-padding
+      padding: 0 $tablet-padding 2rem
+      gap: 80px
 
     @media (max-width: $breakpoint-mobile)
+      flex-direction: column
       padding: 0 $mobile-padding
+      align-items: center
+      gap: 22px
 
     h1
       font-weight: 700
       font-size: 32px
 
+      @media (max-width: $breakpoint-tablet)
+        font-size: 28px
+        line-height: 33.6px
+
+      @media (max-width: $breakpoint-mobile)
+        letter-spacing: 0
+        font-size: 24px
+        line-height: 30.6px
+
     &__menu
-      width: 560px
+      max-width: 560px
+
+      @media (max-width: $breakpoint-tablet)
+        max-width: 336px
+
+      @media (max-width: $breakpoint-mobile)
+        margin: 0 0 38px
 
       &__buttons
-        padding: 0.25rem
-        background-color: (--white)
+        background-color: var(--white)
         margin-bottom: 2rem
+        border-radius: 14px
+        display: flex
+        flex-direction: row
+
+        @media (max-width: $breakpoint-mobile)
+          width: 100%
+          height: 25px
 
         &__item
           color: var(--gray_01)
           font-size: 24px
           border-radius: 10px
-          width: 276px
-          padding-top: 0.625rem
-          padding-bottom: 0.625rem
+          width: 100%
+          height: 52px
+
+          @media (max-width: $breakpoint-tablet)
+            max-width: 165px
+            font-size: 16px
+            height: 32px
+
+          @media (max-width: $breakpoint-mobile)
+            font-size: 12px
+            height: 25px
 
         &__itemActive
           background-color: var(--black)
@@ -101,10 +169,10 @@
     padding: 109px $desktop-padding 90px 
 
     @media (max-width: $breakpoint-tablet)
-      padding: 0 $tablet-padding
+      padding: 80px $tablet-padding 0
 
     @media (max-width: $breakpoint-mobile)
-      padding: 0 $mobile-padding
+      padding: 42px $mobile-padding 20px
 
     &__title
       text-align: center
@@ -112,31 +180,50 @@
       font-weight: 700
       margin-bottom: 80px
 
+      @media (max-width: $breakpoint-tablet)
+        margin-bottom: 60px
+
+      @media (max-width: $breakpoint-mobile)
+        text-align: start
+        line-height: 30.6px
+        font-size: 24px
+        margin-bottom: 2rem
+        letter-spacing: normal
+
     &__main
       display: flex
       flex-direction: row
       justify-content: center
+      align-items: center
+
+      @media (max-width: $breakpoint-mobile)
+        flex-direction: column
 
       &__image
         display: flex
         align-items: center
         width: 35%
 
-        // @media (max-width: $breakpoint-tablet)
-        //   padding: 0 $tablet-padding
+        @media (max-width: $breakpoint-mobile)
+          flex-direction: column
 
         &__leftLine
-          width: 100%
+          // width: 100%
+
+          @media (max-width: $breakpoint-mobile)
+            height: 53px
+
+        &__rightLine
 
   &__partners
     padding: 89px $desktop-padding 106px
     background-color: var(--gray_03)
 
     @media (max-width: $breakpoint-tablet)
-      padding: 0 $tablet-padding
+      padding: 53px $tablet-padding 73px
 
     @media (max-width: $breakpoint-mobile)
-      padding: 0 $mobile-padding
+      padding: 60px $mobile-padding 81px
 
     &__content
       display: flex
@@ -144,12 +231,33 @@
       justify-content: space-between
       align-items: center
 
+      @media (max-width: $breakpoint-mobile)
+        flex-direction: column
+        gap: 21px
+
+      &__title
+
+        @media (max-width: $breakpoint-mobile)
+          font-size: 20px
+
       &__items
         display: flex
         flex-direction: row
         justify-content: space-between
         gap: 81px
         align-items: flex-end
+
+        @media (max-width: $breakpoint-tablet)
+          gap: 55px
+
+        @media (max-width: $breakpoint-mobile)
+          gap: 0.5rem
+          flex-wrap: wrap
+          justify-content: space-around
+
+          &__item
+            @media (max-width: $breakpoint-tablet)
+              max-width: 138px
 
   &__section5
     padding: 73px $desktop-padding 54px
@@ -162,10 +270,13 @@
     align-items: center
 
     @media (max-width: $breakpoint-tablet)
-      padding: 0 $tablet-padding
+      padding: 47px $tablet-padding
+      gap: 75px
 
     @media (max-width: $breakpoint-mobile)
-      padding: 0 $mobile-padding
+      padding: 1.5rem $mobile-padding 50px
+      flex-direction: column
+      gap: 50px
 
     &__content
       width: 100%
@@ -178,17 +289,28 @@
           line-height: 38px
           width: 100%
 
+          @media (max-width: $breakpoint-tablet)
+            font-size: 28px
+
+          @media (max-width: $breakpoint-mobile)
+            letter-spacing: normal
+            font-size: 24px
+
       &__list
         margin-bottom: 80px
         display: flex
         flex-direction: column
         gap: 1.25rem
 
+        @media (max-width: $breakpoint-mobile)
+          margin-bottom: 2rem
+
         &__item
           display: flex
           flex-direction: row
           gap: 1rem
           align-items: flex-start
+          font-size: 14px
 
       &__button
         background-color: var(--black)
@@ -196,27 +318,59 @@
         padding: 12px 45px
         border-radius: 10px
 
+        @media (max-width: $breakpoint-mobile)
+          width: 100%
+
+    &__imageContainer
+      // height: 100%
+      // width: 100%
+
+      @media (max-width: $breakpoint-mobile)
+        overflow: visible
+        position: relative
+        width: 501px
+        height: 335px
+
     &__image
-      position: absolute
-      left: 700px
+      // left: 50%
       width: 721px
       height: 482px
       transform: translateX(15%)
+
+      @media (max-width: $breakpoint-tablet)
+        position: relative
+        left: 0
+        top: 50px
+
+      @media (max-width: $breakpoint-mobile)
+        position: absolute
+        left: 0
+        top: 0
+        // height: 100%
+        width: 501px
+        max-width: none
+        height: 335px
+        padding-left: 28px
       
   &__section6
     background-color: var(--gray_03)
     padding: 125px $desktop-padding 227px
 
     @media (max-width: $breakpoint-tablet)
-      padding: 0 $tablet-padding
+      padding: 48px $tablet-padding 50px
 
     @media (max-width: $breakpoint-mobile)
-      padding: 0 $mobile-padding
+      padding: 80px $mobile-padding 28px
 
     &__title
       font-weight: 700
       font-size: 32px
       margin-bottom: 64px
+
+      @media (max-width: $breakpoint-mobile)
+        font-size: 24px
+        letter-spacing: normal
+        margin-bottom: 35px
 
     &__form
       display: flex
@@ -224,8 +378,15 @@
       gap: 2.5rem
       width: 100%
 
+      @media (max-width: $breakpoint-tablet)
+        flex-direction: column
+
       &__start
         width: 100%
+        // background-color: var(--gray_01)
+
+        @media (max-width: $breakpoint-tablet)
+          height: 220px
 
         &__input
           width: 100%
@@ -291,3 +452,46 @@
           padding-bottom: 0.75rem
           color: var(--white)
           border-radius: 10px
+
+  &__menu
+    position: fixed
+    background-color: var(--white)
+    width: 283px
+    height: 100%
+    right: 0
+    top: 0
+    z-index: 20
+    transition: all 0.2s ease-in-out
+    visibility: hidden
+    opacity: 0
+    display: flex
+    flex-direction: column
+    justify-content: center
+
+    &__active
+      visibility: visible
+      opacity: 1
+
+    &__list
+
+      &__item
+        width: 188px
+        text-align: start
+        padding: 10px 0 10px 2rem
+
+        &__active
+          color: var(--orange)
+
+    @media (max-width: $breakpoint-mobile)
+      width: 100%
+
+    &__burger
+      position: fixed
+      top: 22px
+      right: 40px
+
+      @media (max-width: $breakpoint-mobile)
+        width: 32px
+        height: 32px
+        right: 16px
+        top: 11px

@@ -1,3 +1,5 @@
+@import "../variables"
+
 .card
   width: 300px
   padding: 36px 40px 32px 32px
@@ -5,6 +7,14 @@
   flex-direction: column
   gap: 1rem
 
+  @media (max-width: $breakpoint-mobile)
+    width: 100%
+    padding: 24px
+
   h2
     font-weight: 700
     font-size: 24px
+
+    @media (max-width: $breakpoint-mobile)
+      font-size: 20px
+      line-height: 25.5px
