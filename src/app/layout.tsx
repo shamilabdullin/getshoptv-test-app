@@ -1,5 +1,5 @@
 // CSS
-import './globals.sass'
+import '../styles/globals.sass'
 
 export default function RootLayout({
   children,

@@ -15,11 +15,11 @@ type CardProps = {
 function Card({ icon, title, text }: CardProps) {
   return (
     <div className={styles.card}>
-      <Image src={icon} alt="" />
+      <Image src={icon} alt="arrow" />
       <h2>{title}</h2>
       <p>{text}</p>
     </div>
   )
 }
 
-export default Card
+export default React.memo(Card)
