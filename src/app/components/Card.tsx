@@ -1,12 +1,15 @@
 import React from 'react'
-import styles from './Card.module.sass'
+
+// Components
 import Image from 'next/image'
+
+// CSS
+import styles from './Card.module.sass'
 
 type CardProps = {
   icon: string
   title: string
   text: string
-  // className: string
 }
 
 function Card({ icon, title, text }: CardProps) {
