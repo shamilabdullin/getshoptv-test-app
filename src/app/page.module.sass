@@ -1,12 +1,12 @@
 @import "./variables"
   
 .home
-  padding:2rem 0 2rem 0
+  padding:0
   overflow: hidden
   background-color: var(--gray_03)
 
   @media (max-width: $breakpoint-tablet)
-    padding-top: 11px
+    padding: 0
 
   @media (max-width: $breakpoint-mobile)
     padding-top: 0
@@ -53,7 +53,7 @@
           height: 32px
 
   &__main
-    padding: 116px $desktop-padding 183px
+    padding: 172px $desktop-padding 183px
     background-image: url('./Background.png')
     background-repeat: no-repeat
     background-size: 100% 100%
@@ -68,6 +68,7 @@
     h1
       margin-bottom: 2rem
       line-height: 88px
+      letter-spacing: -2px
 
       @media (max-width: $breakpoint-tablet)
         line-height: 57.2px
@@ -79,15 +80,25 @@
       font-weight: 400
       font-size: 24px
       margin-bottom: 80px
+      line-height: 32px
+
+      @media (max-width: $breakpoint-tablet)
+        font-size: 14px
+        margin-bottom: 60px
+        line-height: 20px
 
       @media (max-width: $breakpoint-mobile)
         font-size: 16px
+        line-height: 20.4px
 
     &__action
       background-color: var(--orange)
       padding: 12px 45px
       border-radius: 10px
       color: var(--white)
+
+      @media (max-width: $breakpoint-tablet)
+        width: 100%
 
       @media (max-width: $breakpoint-mobile)
         width: 100%
@@ -114,10 +125,12 @@
     h1
       font-weight: 700
       font-size: 32px
+      line-height: 38.4px
 
       @media (max-width: $breakpoint-tablet)
         font-size: 28px
         line-height: 33.6px
+        letter-spacing: normal
 
       @media (max-width: $breakpoint-mobile)
         letter-spacing: 0
@@ -132,6 +145,10 @@
 
       @media (max-width: $breakpoint-mobile)
         margin: 0 0 38px
+
+      p 
+        @media (max-width: $breakpoint-mobile)
+          font-size: 16px
 
       &__buttons
         background-color: var(--white)
@@ -166,10 +183,10 @@
 
   &__promotion
     background-color: var(--gray_04)
-    padding: 109px $desktop-padding 90px 
+    padding: 109px $desktop-padding 160px 
 
     @media (max-width: $breakpoint-tablet)
-      padding: 80px $tablet-padding 0
+      padding: 80px $tablet-padding 74px
 
     @media (max-width: $breakpoint-mobile)
       padding: 42px $mobile-padding 20px
@@ -179,9 +196,13 @@
       font-size: 32px
       font-weight: 700
       margin-bottom: 80px
+      line-height: 38.4px
 
       @media (max-width: $breakpoint-tablet)
         margin-bottom: 60px
+        font-size: 28px
+        letter-spacing: normal
+        line-height: 33.6px
 
       @media (max-width: $breakpoint-mobile)
         text-align: start
@@ -195,6 +216,7 @@
       flex-direction: row
       justify-content: center
       align-items: center
+      width: 100%
 
       @media (max-width: $breakpoint-mobile)
         flex-direction: column
@@ -202,18 +224,22 @@
       &__image
         display: flex
         align-items: center
-        width: 35%
 
         @media (max-width: $breakpoint-mobile)
           flex-direction: column
 
         &__leftLine
-          // width: 100%
+          @media (max-width: $breakpoint-tablet)
+            width: 90px
 
           @media (max-width: $breakpoint-mobile)
             height: 53px
 
         &__rightLine
+          @media (max-width: $breakpoint-tablet)
+            width: 90px
+          @media (max-width: $breakpoint-mobile)
+            height: 53px
 
   &__partners
     padding: 89px $desktop-padding 106px
@@ -236,6 +262,11 @@
         gap: 21px
 
       &__title
+        font-size: 24px
+
+        @media (max-width: $breakpoint-tablet)
+          font-size: 16px
+          line-height: 20.4px
 
         @media (max-width: $breakpoint-mobile)
           font-size: 20px
@@ -249,6 +280,7 @@
 
         @media (max-width: $breakpoint-tablet)
           gap: 55px
+          justify-content: space-around
 
         @media (max-width: $breakpoint-mobile)
           gap: 0.5rem
@@ -260,18 +292,17 @@
               max-width: 138px
 
   &__section5
-    padding: 73px $desktop-padding 54px
+    padding: 115px $desktop-padding 95px
     background-color: var(--gray_04) !important
     display: flex
     flex-direction: row
-    gap: 172px
     margin: 0
     overflow: hidden
     align-items: center
 
     @media (max-width: $breakpoint-tablet)
-      padding: 47px $tablet-padding
-      gap: 75px
+      padding: 47px $tablet-padding 70px
+      gap: 0
 
     @media (max-width: $breakpoint-mobile)
       padding: 1.5rem $mobile-padding 50px
@@ -279,7 +310,6 @@
       gap: 50px
 
     &__content
-      width: 100%
 
       &__title
         h1
@@ -291,8 +321,10 @@
 
           @media (max-width: $breakpoint-tablet)
             font-size: 28px
+            letter-spacing: normal
 
           @media (max-width: $breakpoint-mobile)
+            line-height: 30.6px
             letter-spacing: normal
             font-size: 24px
 
@@ -301,6 +333,9 @@
         display: flex
         flex-direction: column
         gap: 1.25rem
+
+        @media (max-width: $breakpoint-tablet)
+          margin-bottom: 2rem
 
         @media (max-width: $breakpoint-mobile)
           margin-bottom: 2rem
@@ -312,6 +347,15 @@
           align-items: flex-start
           font-size: 14px
 
+          p
+            font-size: 22px
+
+            @media (max-width: $breakpoint-tablet)
+              font-size: 14px
+
+            @media (max-width: $breakpoint-mobile)
+              font-size: 14px
+
       &__button
         background-color: var(--black)
         color: var(--white)
@@ -322,42 +366,48 @@
           width: 100%
 
     &__imageContainer
-      // height: 100%
-      // width: 100%
 
-      @media (max-width: $breakpoint-mobile)
+      @media (max-width: $breakpoint-tablet)
         overflow: visible
         position: relative
         width: 501px
         height: 335px
 
+      @media (max-width: $breakpoint-mobile)
+        overflow: visible
+        position: relative
+        width: 399px
+        height: 266px
+
     &__image
-      // left: 50%
       width: 721px
       height: 482px
-      transform: translateX(15%)
+      transform: translateX(30%)
 
       @media (max-width: $breakpoint-tablet)
-        position: relative
+        position: absolute
         left: 0
-        top: 50px
+        top: 0
+        height: 100%
+        width: 180%
+        max-width: none
+        transform: translateX(5%)
 
       @media (max-width: $breakpoint-mobile)
         position: absolute
         left: 0
         top: 0
-        // height: 100%
-        width: 501px
+        height: 100%
+        width: 100%
         max-width: none
-        height: 335px
-        padding-left: 28px
+        // transform: translateX(15%)
       
   &__section6
     background-color: var(--gray_03)
     padding: 125px $desktop-padding 227px
 
     @media (max-width: $breakpoint-tablet)
-      padding: 48px $tablet-padding 50px
+      padding: 3rem $tablet-padding 50px
 
     @media (max-width: $breakpoint-mobile)
       padding: 80px $mobile-padding 28px
@@ -366,6 +416,11 @@
       font-weight: 700
       font-size: 32px
       margin-bottom: 64px
+
+      @media (max-width: $breakpoint-tablet)
+        letter-spacing: normal
+        font-size: 28px
+        margin-bottom: 2rem
 
       @media (max-width: $breakpoint-mobile)
         font-size: 24px
@@ -380,6 +435,7 @@
 
       @media (max-width: $breakpoint-tablet)
         flex-direction: column
+        gap: 2rem
 
       &__start
         width: 100%
@@ -445,6 +501,12 @@
           gap: 0.5rem
           margin-bottom: 3rem
 
+          @media (max-width: $breakpoint-tablet)
+            margin-bottom: 62px
+
+          @media (max-width: $breakpoint-mobile)
+            margin-bottom: 2rem
+
         &__button
           width: 100%
           background-color: var(--black)
@@ -487,7 +549,7 @@
 
     &__burger
       position: fixed
-      top: 22px
+      top: 11px
       right: 40px
 
       @media (max-width: $breakpoint-mobile)

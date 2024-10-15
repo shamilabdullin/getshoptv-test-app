@@ -21,17 +21,18 @@ import TopLine from '@/public/TopLine.svg'
 import BottomLine from '@/public/BottomLine.svg'
 
 export default function Home() {
-  const [source, setSource] = useState('operators')
-
   const advantagesBlock = useRef(null)
   const howWeWorkBlock = useRef(null)
   const mainBlock = useRef(null)
+
+  const [source, setSource] = useState('operators')
   const [visibleBlock, setVisibleBlock] = useState('')
   const [isCorrectEmail, setIsCorrectEmail] = useState(true)
   const [email, setEmail] = useState('')
+  const [isOpenMenu, setIsOpenMenu] = useState(false)
+
   const tablet = useMediaQuery(`(max-width: 1023px)`)
   const mobile = useMediaQuery(`(max-width: 767px)`)
-  const [isOpenMenu, setIsOpenMenu] = useState(false)
 
   useEffect(() => {
     const howWeWorkObserver = new IntersectionObserver(([entry]) => {
@@ -215,7 +216,7 @@ export default function Home() {
                 className={styles.home__promotion__main__image__leftLine}
               />
             </div>
-            <Image src={SquareOrange} alt="" />
+            <Image src={SquareOrange} alt="" width={tablet ? 80 : 120} height={tablet ? 80 : 120} />
             <div className={styles.home__promotion__main__image__rightLine}>
               <Image
                 src={!mobile ? RightLineOrange : BottomLine}
@@ -272,9 +273,7 @@ export default function Home() {
       <section className={styles.home__section5} ref={howWeWorkBlock}>
         <div className={styles.home__section5__content}>
           <div className={styles.home__section5__content__title}>
-            <h1>
-              Подробные{tablet ? <br /> : <></>} отчёты для вас и <br /> правообладателей
-            </h1>
+            <h1>Подробные{tablet ? <br /> : <></>} отчёты для вас и правообладателей</h1>
           </div>
           <ul className={styles.home__section5__content__list}>
             <li className={styles.home__section5__content__list__item}>
@@ -298,7 +297,7 @@ export default function Home() {
           </ul>
           <button className={styles.home__section5__content__button}>Заказать звонок</button>
         </div>
-        {mobile ? (
+        {tablet ? (
           <div className={styles.home__section5__imageContainer}>
             <Image src={Notebook} alt="" className={styles.home__section5__image} />
           </div>
